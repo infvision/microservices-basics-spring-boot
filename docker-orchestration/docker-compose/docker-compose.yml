@@ -27,8 +27,7 @@ services:
     ports:
       - "8888/tcp"
     depends_on:
-      mysqldb:
-        condition: service_healthy
+      - mysqldb
 
   eurekaregistry:
     image: anilallewar/basic-webservice-registry:0.0.1
@@ -42,8 +41,7 @@ services:
     ports:
       - "8761:8761/tcp"
     depends_on:
-      configserver:
-        condition: service_healthy
+      - configserver
 
   authserver:
     image: anilallewar/basic-auth-server:0.0.1
@@ -52,8 +50,7 @@ services:
     ports:
       - "8899/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   apigateway:
     image: anilallewar/basic-api-gateway:0.0.1
@@ -62,8 +59,7 @@ services:
     ports:
       - "8765:8765/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   webportal:
     image: anilallewar/basic-web-portal:0.0.1
@@ -72,8 +68,7 @@ services:
     ports:
       - "8080/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   userwebservice:
     image: anilallewar/basic-user-webservice:0.0.1
@@ -82,8 +77,7 @@ services:
     ports:
       - "8080/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   taskwebservice:
     image: anilallewar/basic-task-webservice:0.0.1
@@ -92,8 +86,7 @@ services:
     ports:
       - "8080/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   commentswebservice:
     image: anilallewar/basic-comments-webservice:0.0.1
@@ -102,8 +95,7 @@ services:
     ports:
       - "8080/tcp"
     depends_on:
-      eurekaregistry:
-        condition: service_healthy
+      - eurekaregistry
 
   zipkinserver:
     image: anilallewar/basic-zipkin-server:0.0.1
@@ -112,5 +104,4 @@ services:
     ports:
       - "9411:9411/tcp"
     depends_on:
-      configserver:
-        condition: service_healthy
+      - configserver
